@@ -12,6 +12,12 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="sbt: scala-sdk-3.2.0" level="project" />
+    <orderEntry type="library" name="sbt: com.thoughtworks.paranamer:paranamer:2.8:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.json4s:json4s-ast_3:4.0.6:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.json4s:json4s-core_3:4.0.6:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.json4s:json4s-native-core_3:4.0.6:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.json4s:json4s-native_3:4.0.6:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.json4s:json4s-scalap_3:4.0.6:jar" level="project" />
     <orderEntry type="library" name="sbt: org.scala-lang:scala-library:2.13.8:jar" level="project" />
     <orderEntry type="library" name="sbt: org.scala-lang:scala3-library_3:3.2.0:jar" level="project" />
   </component>
