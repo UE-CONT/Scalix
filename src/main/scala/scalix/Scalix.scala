@@ -54,12 +54,7 @@ object Scalix extends App {
     val cont = src.mkString
     val parsed = parse(cont)
     val movies: List[(Int,String)] = (parsed \ "cast").extract[List[Map[String,Any]]].map
-      { e => (e("id"), e("title")) match {
-        case (int : BigInt,string : String) => (int.toInt,string)
-        case (i,s) => {println("Type error")
-                        (0,"None")}
-        }
-      }
+      { e => (e("id").asInstanceOf[BigInt].toInt, e("title").asInstanceOf[String]) }
     //println(s"Contents: $cont")
     movies.toSet
 
@@ -73,10 +68,7 @@ object Scalix extends App {
     breakable {
       for (c <- crew) {
         if (c("job") == "Director") {
-          (c("id"), c("name")) match {
-            case (int: BigInt, string: String) => result = Some((int.toInt, string))
-            case _ => println("Type error")
-          }
+          result = Some((c("id").asInstanceOf[BigInt].toInt, c("name").asInstanceOf[String]))
           break
         }
       }
