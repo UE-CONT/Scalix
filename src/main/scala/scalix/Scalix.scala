@@ -38,15 +38,23 @@ object Scalix extends App {
    */
   val col = collaboration(new FullName("Matt","Damon"), new FullName("Ben","Affleck"))
   println(col)
-
+  val findActorCache : Map[(String, String), Int] = Map()
   def findActorId(name: String, surname: String): Option[Int] =
-    val urlActor = s"https://api.themoviedb.org/3/search/person?query=$name+$surname&api_key=$key"
-    val src = Source.fromURL(urlActor)
-    val cont = src.mkString
-    val parsed = parse(cont)
-    val id = ((parsed \ "results" )(0) \ "id").extractOpt[Int]
-    //println(s"Contents: $cont")
-    id
+    if (findActorCache.get((name,surname)).isDefined) {
+      System.out.println()
+      findActorCache.get((name,surname))
+    }
+    else {
+      val urlActor = s"https://api.themoviedb.org/3/search/person?query=$name+$surname&api_key=$key"
+      val src = Source.fromURL(urlActor)
+      val cont = src.mkString
+      val parsed = parse(cont)
+      val id = ((parsed \ "results")(0) \ "id").extractOpt[Int]
+      //println(s"Contents: $cont")
+      findActorCache + ((name,surname) -> id)
+      id
+    }
+
 
   def findActorMovies(actorId: Int): Set[(Int, String)] =
     val urlMovies = s"https://api.themoviedb.org/3/person/$actorId/movie_credits?language=en-US&api_key=$key"
